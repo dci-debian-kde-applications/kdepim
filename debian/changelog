@@ -1,3 +1,15 @@
+kdepim (4:16.04.3-2~) UNRELEASED; urgency=medium
+
+  * Add new patch: akregator_crash_on_exit.patch.
+    Thanks to Ismael Bejarano for the backtrace and Sandro Knauß for the patch
+    (Closes: 836011)
+  * Update install files
+  * Add libkf5akonadisearch-plugins dependency to kmail.
+    Thanks to Maria for reporting (Closes: 830563)
+  * Use the new kf5 dev names, and wrap-and-sort
+
+ -- Maximiliano Curia <maxy@gnuservers.com.ar>  Thu, 20 Oct 2016 09:58:19 +0200
+
 kdepim (4:16.04.3-1) unstable; urgency=medium
 
   * Add missing runtime dependencies.
