@@ -12,7 +12,6 @@ Uploaders: Sune Vuorela <sune@debian.org>,
 Build-Depends: cmake (>= 2.8.12~),
                debhelper (>= 9),
                extra-cmake-modules (>= 5.19.0~),
-               kdoctools-dev,
                kross-dev (>= 5.19.0~),
                libassuan-dev,
                libboost-dev (>= 1.40.0-2),
@@ -41,6 +40,7 @@ Build-Depends: cmake (>= 2.8.12~),
                libkf5coreaddons-dev (>= 5.16.0~),
                libkf5dbusaddons-dev (>= 5.19.0~),
                libkf5dnssd-dev (>= 5.19.0~),
+               libkf5doctools-dev,
                libkf5eventviews-dev (>= 5.2.0~),
                libkf5followupreminder-dev (>= 5.2.0~),
                libkf5gapi-dev (>= 5.1~),
@@ -130,7 +130,7 @@ Depends: accountwizard (>= ${source:Version}),
          kontact (>= ${source:Version}),
          korganizer (>= ${source:Version}),
          ${misc:Depends}
-Recommends: kdepim-doc, kdepim-addons
+Recommends: kdepim-addons, kdepim-doc
 Description: Personal Information Management apps from the official KDE release
  KDE (the K Desktop Environment) is a powerful Open Source graphical
  desktop environment for Unix workstations. It combines ease of use,
@@ -180,7 +180,7 @@ Description: KDE Personal Information Management library documentation
 Package: akregator
 Section: web
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, kinit, kio
+Depends: kinit, kio, ${misc:Depends}, ${shlibs:Depends}
 Homepage: http://akregator.kde.org/
 Description: RSS/Atom feed aggregator
  Akregator is a news feed reader. It enables you to follow
@@ -253,10 +253,10 @@ Depends: akonadi-server (>= 4:16.04),
 Recommends: accountwizard,
             gnupg-agent,
             gnupg2,
+            kdepim-addons,
             kdepim-doc,
             kdepim-themeeditors,
             ktnef,
-            kdepim-addons,
             pinentry-qt | pinentry-x11
 Suggests: clamav,
           kaddressbook,
