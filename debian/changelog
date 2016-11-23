@@ -1,4 +1,4 @@
-kdepim (4:16.04.3-3~) UNRELEASED; urgency=medium
+kdepim (4:16.04.3-3) UNRELEASED; urgency=medium
 
   * Team upload.
 
@@ -9,9 +9,10 @@ kdepim (4:16.04.3-3~) UNRELEASED; urgency=medium
   * Fix "kalarm crashes after second instance started"(Closes: #844628)
     - Added backported upstream commit d8c5a241747675e767f96da9444c5745430fab62
       fix_crash_when_a_second_instance_of_KAlarm_is_started.patch
-  * Fix "konsolekalendar seems to have useless default behaviour" (Closes: #402084)
+  * Fix "konsolekalendar seems to have useless default behaviour"
+      (Closes: #402084)
     - Added patch konsolekalendar_help.patch
-      Thanks to Tomas Pospisek for the patch.
+      Thanks to Tomas Pospisek for the patch
   * Delete unused lintian-override file.
   * Add Multi-Arch hint for kdepim-doc.
 
