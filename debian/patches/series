@@ -1,3 +1,5 @@
 debianize_akregator_default.diff
 kubuntu_debianize_akregator_default.diff
 akregator_crash_on_exit.patch
+fix_crash_on_exit.patch
+fix_crash_when_a_second_instance_of_KAlarm_is_started.patch

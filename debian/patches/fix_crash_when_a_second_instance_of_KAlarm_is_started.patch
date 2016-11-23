@@ -1,0 +1,81 @@
+From d8c5a241747675e767f96da9444c5745430fab62 Mon Sep 17 00:00:00 2001
+From: David Jarvie <djarvie@kde.org>
+Date: Sun, 30 Oct 2016 18:05:25 +0000
+Subject: Bug 371628: Fix crash when a second instance of KAlarm is started
+
+KDBusService doesn't supply any command line arguments in its
+activateRequested() signal unless there is at least one command
+line option (in addition to the program name) in the command
+invocation.
+
+Forward port of Applications/16.08 commit
+6bd68f98d675e30fab24713e63dfe72cdfd6f4f5.
+---
+ Changelog         |  3 ++-
+ src/kalarmapp.cpp | 12 ++++++++++--
+ src/kalarmapp.h   |  1 +
+ 3 files changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/Changelog b/Changelog
+index c9b60fd..8a12cea 100644
+--- a/Changelog
++++ b/Changelog
+@@ -1,7 +1,8 @@
+ KAlarm Change Log
+ 
+-=== Version 2.11.10 (KDE Applications 16.08.3) --- 21 October 2016 ===
++=== Version 2.11.10 (KDE Applications 16.08.3) --- 30 October 2016 ===
+ + Fix default calendar files not being created on first run [KDE Bug 362962]
+++ Fix crash when a second instance of KAlarm is started [KDE Bug 371628]
+ 
+ === Version 2.11.9 (KDE Applications 16.08.1) --- 18 August 2016 ===
+ * Prevent KAlarm autostarting on non-KDE desktops if it has never been run [KDE Bug 366562]
+diff --git a/src/kalarmapp.cpp b/src/kalarmapp.cpp
+index 555495b..d72ea8c 100644
+--- a/src/kalarmapp.cpp
++++ b/src/kalarmapp.cpp
+@@ -122,7 +122,7 @@ KAlarmApp::KAlarmApp(int& argc, char** argv)
+ #endif
+ 
+     // Make this a unique application.
+-    KDBusService* s = new KDBusService(KDBusService::Unique);
++    KDBusService* s = new KDBusService(KDBusService::Unique, this);
+     connect(this, &KAlarmApp::aboutToQuit, s, &KDBusService::deleteLater);
+     connect(s, &KDBusService::activateRequested, this, &KAlarmApp::activate);
+ 
+@@ -335,11 +335,19 @@ void KAlarmApp::activate(const QStringList& args, const QString& workingDirector
+         return;
+     }
+ 
++    // The D-Bus call to activate a subsequent instance of KAlarm may not supply
++    // any arguments, but we need one.
++    if (!args.isEmpty()  &&  mActivateArg0.isEmpty())
++        mActivateArg0 = args[0];
++    QStringList fixedArgs(args);
++    if (args.isEmpty()  &&  !mActivateArg0.isEmpty())
++        fixedArgs << mActivateArg0;
++
+     // Parse and interpret command line arguments.
+     QCommandLineParser parser;
+     KAboutData::applicationData().setupCommandLine(&parser);
+     parser.setApplicationDescription(QApplication::applicationDisplayName());
+-    const QStringList newArgs = CommandOptions::setOptions(&parser, args);
++    const QStringList newArgs = CommandOptions::setOptions(&parser, fixedArgs);
+     parser.process(newArgs);
+     KAboutData::applicationData().processCommandLine(&parser);
+ 
+diff --git a/src/kalarmapp.h b/src/kalarmapp.h
+index ea6a055..96a9c1c 100644
+--- a/src/kalarmapp.h
++++ b/src/kalarmapp.h
+@@ -196,6 +196,7 @@ class KAlarmApp : public QApplication
+         bool               mQuitting;            // a forced quit is in progress
+         bool               mReadOnly;            // only read-only access to calendars is needed
+         bool               mLoginAlarmsDone;     // alarms repeated at login have been processed
++        QString            mActivateArg0;        // activate()'s first arg the first time it was called
+         DBusHandler*       mDBusHandler;         // the parent of the main DCOP receiver object
+         TrayWindow*        mTrayWindow;          // active system tray icon
+         QTimer*            mAlarmTimer;          // activates KAlarm when next alarm is due
+-- 
+cgit v0.11.2
+
