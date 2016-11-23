@@ -7,42 +7,12 @@ The QCoreApplication instance wasn't deleted before libraries
 were unloaded, which resulted in a crash during clean-up. See
 https://github.com/lxde/lxqt/issues/1193#issuecomment-260337417.
 ---
- Changelog    | 3 +++
- src/kalarm.h | 2 +-
  src/main.cpp | 6 +++++-
- 3 files changed, 9 insertions(+), 2 deletions(-)
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/Changelog b/Changelog
-index 9b204d2..975d1ac 100644
---- a/Changelog
-+++ b/Changelog
-@@ -1,5 +1,8 @@
- KAlarm Change Log
- 
-+=== Version 2.11.11 (KDE Applications 16.12.0) --- 16 November 2016 ===
-++ Fix crash on exit [KDE Bug 372223]
-+
- === Version 2.11.10 (KDE Applications 16.08.3) --- 31 October 2016 ===
- + Fix default calendar files not being created on first run [KDE Bug 362962]
- + Fix crash when a second instance of KAlarm is started [KDE Bug 371628]
-diff --git a/src/kalarm.h b/src/kalarm.h
-index de85165..ea8cef7 100644
---- a/src/kalarm.h
-+++ b/src/kalarm.h
-@@ -24,7 +24,7 @@
- #undef QT3_SUPPORT
- 
- #define VERSION_SUFFIX "-5"
--#define KALARM_VERSION "2.11.10" VERSION_SUFFIX
-+#define KALARM_VERSION "2.11.11" VERSION_SUFFIX
- 
- #define KALARM_NAME "KAlarm"
- #define KALARM_DBUS_SERVICE  "org.kde.kalarm"  // D-Bus service name of KAlarm application
-diff --git a/src/main.cpp b/src/main.cpp
-index 15627ff..db00e03 100644
---- a/src/main.cpp
-+++ b/src/main.cpp
-@@ -29,6 +29,7 @@
+--- a/kalarm/main.cpp
++++ b/kalarm/main.cpp
+@@ -30,6 +30,7 @@
  #include <KLocalizedString>
  
  #include <QDir>
@@ -50,10 +20,10 @@ index 15627ff..db00e03 100644
  
  #include <stdlib.h>
  
-@@ -36,7 +37,10 @@
+@@ -40,7 +41,10 @@ int main(int argc, char* argv[])
+     KAlarmMigrateApplication migrate;
+     migrate.migrate();
  
- int main(int argc, char* argv[])
- {
 -    KAlarmApp* app = KAlarmApp::create(argc, argv);
 +    // Use QScopedPointer to ensure the QCoreApplication instance is deleted
 +    // before libraries unload, to avoid crashes during clean-up.
@@ -61,7 +31,4 @@ index 15627ff..db00e03 100644
 +
      QStringList args = app->arguments();
      app->setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-     app->setAttribute(Qt::AA_EnableHighDpiScaling);
--- 
-cgit v0.11.2
-
+ #if QT_VERSION >= 0x050600

@@ -11,30 +11,13 @@ invocation.
 Forward port of Applications/16.08 commit
 6bd68f98d675e30fab24713e63dfe72cdfd6f4f5.
 ---
- Changelog         |  3 ++-
- src/kalarmapp.cpp | 12 ++++++++++--
- src/kalarmapp.h   |  1 +
- 3 files changed, 13 insertions(+), 3 deletions(-)
+ kalarm/kalarmapp.cpp | 12 ++++++++++--
+ kalarm/kalarmapp.h   |  1 +
+ 2 files changed, 13 insertions(+), 3 deletions(-)
 
-diff --git a/Changelog b/Changelog
-index c9b60fd..8a12cea 100644
---- a/Changelog
-+++ b/Changelog
-@@ -1,7 +1,8 @@
- KAlarm Change Log
- 
--=== Version 2.11.10 (KDE Applications 16.08.3) --- 21 October 2016 ===
-+=== Version 2.11.10 (KDE Applications 16.08.3) --- 30 October 2016 ===
- + Fix default calendar files not being created on first run [KDE Bug 362962]
-++ Fix crash when a second instance of KAlarm is started [KDE Bug 371628]
- 
- === Version 2.11.9 (KDE Applications 16.08.1) --- 18 August 2016 ===
- * Prevent KAlarm autostarting on non-KDE desktops if it has never been run [KDE Bug 366562]
-diff --git a/src/kalarmapp.cpp b/src/kalarmapp.cpp
-index 555495b..d72ea8c 100644
---- a/src/kalarmapp.cpp
-+++ b/src/kalarmapp.cpp
-@@ -122,7 +122,7 @@ KAlarmApp::KAlarmApp(int& argc, char** argv)
+--- a/kalarm/kalarmapp.cpp
++++ b/kalarm/kalarmapp.cpp
+@@ -122,7 +122,7 @@ KAlarmApp::KAlarmApp(int& argc, char** a
  #endif
  
      // Make this a unique application.
@@ -43,7 +26,7 @@ index 555495b..d72ea8c 100644
      connect(this, &KAlarmApp::aboutToQuit, s, &KDBusService::deleteLater);
      connect(s, &KDBusService::activateRequested, this, &KAlarmApp::activate);
  
-@@ -335,11 +335,19 @@ void KAlarmApp::activate(const QStringList& args, const QString& workingDirector
+@@ -332,11 +332,19 @@ void KAlarmApp::activate(const QStringLi
          return;
      }
  
@@ -64,10 +47,8 @@ index 555495b..d72ea8c 100644
      parser.process(newArgs);
      KAboutData::applicationData().processCommandLine(&parser);
  
-diff --git a/src/kalarmapp.h b/src/kalarmapp.h
-index ea6a055..96a9c1c 100644
---- a/src/kalarmapp.h
-+++ b/src/kalarmapp.h
+--- a/kalarm/kalarmapp.h
++++ b/kalarm/kalarmapp.h
 @@ -196,6 +196,7 @@ class KAlarmApp : public QApplication
          bool               mQuitting;            // a forced quit is in progress
          bool               mReadOnly;            // only read-only access to calendars is needed
@@ -76,6 +57,3 @@ index ea6a055..96a9c1c 100644
          DBusHandler*       mDBusHandler;         // the parent of the main DCOP receiver object
          TrayWindow*        mTrayWindow;          // active system tray icon
          QTimer*            mAlarmTimer;          // activates KAlarm when next alarm is due
--- 
-cgit v0.11.2
-
