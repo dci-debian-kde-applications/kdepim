@@ -13,6 +13,7 @@ kdepim (4:16.04.3-3~) UNRELEASED; urgency=medium
     - Added patch konsolekalendar_help.patch
       Thanks to Tomas Pospisek for the patch.
   * Delete unused lintian-override file.
+  * Add Multi-Arch hint for kdepim-doc.
 
  -- Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>  Wed, 23 Nov 2016 12:26:39 +0100
 

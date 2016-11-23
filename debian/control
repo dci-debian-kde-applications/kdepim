@@ -142,6 +142,7 @@ Description: Personal Information Management apps from the official KDE release
 
 Package: kdepim-doc
 Section: doc
+Multi-Arch: foreign
 Architecture: all
 Suggests: doc-base, konqueror | www-browser
 Breaks: akregator (<< 4:4.14.3),
