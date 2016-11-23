@@ -1,0 +1,24 @@
+Description: Add description what konsolekalendar does in default settings.
+ Update the homepage in addition.
+Author: Tomas Pospisek <tpo_deb@sourcepole.ch>
+Origin: Debian
+Bug-Debian>: https://bugs.debian.org/402084
+Reviewed-by: Sandro Knauß <hefee@debian.org>
+Last-Update: 2016-11-23
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/console/konsolekalendar/main.cpp
++++ b/console/konsolekalendar/main.cpp
+@@ -178,8 +178,11 @@ int main(int argc, char *argv[])
+                       "--description \"Get My Head Examined\"\n"
+                       "  konsolekalendar --delete --uid KOrganizer-1740326.803"));
+     options.add("",
++                ki18n( "Without any options konsolekalendar will output today's events\n"
++                       "from 7am to 5pm or nothing at all if there aren't any"));
++    options.add("",
+                 ki18n("For more information visit the program home page at:\n"
+-                      "  http://pim.kde.org/components/konsolekalendar.php"));
++                      "  https://userbase.kde.org/KonsoleKalendar"));
+     KCmdLineArgs::addCmdLineOptions(options);   // Add our own options.
+ 
+     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
