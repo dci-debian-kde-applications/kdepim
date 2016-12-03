@@ -1,0 +1,62 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -67,7 +67,7 @@ set(KIMAP_LIB_VERSION "5.2.0")
+ set(KMBOX_LIB_VERSION "5.2.0")
+ set(AKONADICALENDAR_LIB_VERSION "5.2.0")
+ set(SYNDICATION_LIB_VERSION "5.2.0")
+-set(GPGMEPP_LIB_VERSION "5.2.0")
++set(GPGMEPP_LIB_VERSION "1.8.0")
+ set(KONTACTINTERFACE_LIB_VERSION "5.2.0")
+ set(AKONADIKALARM_LIB_VERSION "5.2.0")
+ set(KMIME_LIB_VERSION "5.2.0")
+@@ -132,7 +132,8 @@ find_package(KF5Mbox ${KMBOX_LIB_VERSION
+ find_package(KF5AkonadiCalendar ${AKONADICALENDAR_LIB_VERSION} CONFIG REQUIRED)
+ 
+ find_package(KF5Syndication ${SYNDICATION_LIB_VERSION} CONFIG REQUIRED)
+-find_package(KF5Gpgmepp ${GPGMEPP_LIB_VERSION} CONFIG REQUIRED)
++find_package(Gpgmepp ${GPGMEPP_LIB_VERSION} CONFIG REQUIRED)
++find_package(QGpgme ${GPGMEPP_LIB_VERSION} CONFIG REQUIRED)
+ find_package(KF5KontactInterface ${KONTACTINTERFACE_LIB_VERSION} CONFIG REQUIRED)
+ find_package(KF5AlarmCalendar ${AKONADIKALARM_LIB_VERSION} CONFIG REQUIRED)
+ find_package(KF5Mime ${KMIME_LIB_VERSION} CONFIG REQUIRED)
+--- a/kaddressbook/CMakeLists.txt
++++ b/kaddressbook/CMakeLists.txt
+@@ -21,7 +21,7 @@ add_subdirectory(printing)
+ add_subdirectory(kontactplugin)
+ add_subdirectory(kconf_update)
+ 
+-if(KF5Gpgmepp_FOUND)
++if(QGpgme_FOUND)
+   add_definitions(-DQGPGME_FOUND)
+ endif()
+ 
+@@ -117,16 +117,14 @@ PRIVATE
+ )
+ if (WIN32)
+    target_link_libraries(kaddressbookprivate KF5::Gpgmepp)
+-else()
+-   target_link_libraries(kaddressbookprivate PRIVATE KF5::Gpgmepp-pthread)
+ endif()
+ if (BUILD_TESTING)
+    add_subdirectory(autotests)
+    add_subdirectory(tests)
+ endif()
+ 
+-if(KF5Gpgmepp_FOUND)
+-   target_link_libraries(kaddressbookprivate PRIVATE KF5::QGpgme)
++if(QGpgme_FOUND)
++   target_link_libraries(kaddressbookprivate PRIVATE QGpgme)
+ endif()
+ if(KF5Prison_FOUND)
+    target_link_libraries(kaddressbookprivate PRIVATE KF5::Prison)
+@@ -156,8 +154,8 @@ target_link_libraries(kaddressbook
+   KF5::Parts
+ )
+ 
+-if(KF5Gpgmepp_FOUND)
+-  target_link_libraries(kaddressbook KF5::QGpgme)
++if(QGpgme_FOUND)
++  target_link_libraries(kaddressbook QGpgme)
+ endif()
+ 
+ install(TARGETS kaddressbook ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

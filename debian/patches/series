@@ -4,3 +4,4 @@ akregator_crash_on_exit.patch
 fix_crash_on_exit.patch
 fix_crash_when_a_second_instance_of_KAlarm_is_started.patch
 konsolekalendar_help.patch
+remove_gpgmepp.patch
