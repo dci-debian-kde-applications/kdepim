@@ -1,3 +1,14 @@
+kdepim (4:4.14.1-1+deb8u1) jessie; urgency=high
+
+  * Team upload.
+  * Fix CVE-2017-9604: Send Later with Delay bypasses OpenPGP (Closes: #864804)
+    - Added upstream patch 78c5552be2f00a4ac25bd77ca39386522fca70a8 in file
+      fix-CVE-2017-9604.patch
+    - Added upstream patch c54706e990bbd6498e7b1597ec7900bc809e8197 in file
+      fix-CVE-2017-9604.p2.patch (nowadays messagelib)
+
+ -- Sandro Knauß <hefee@debian.org>  Fri, 25 Aug 2017 20:18:55 +0200
+
 kdepim (4:4.14.1-1) unstable; urgency=medium
 
   * Remove old Breaks/Replaces (for versions older than oldstable).
