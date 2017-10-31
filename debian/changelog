@@ -1,4 +1,4 @@
-kdepim (4:16.08.1-1~2.gbpb36d9f) UNRELEASED; urgency=medium
+kdepim (4:16.08.1-1~2.gbpb36d9f1) UNRELEASED; urgency=medium
 
   ** SNAPSHOT build @b36d9f5ab35ffde3ed81e8616b1f61966d87f80b **
 
@@ -16,6 +16,7 @@ kdepim (4:16.08.1-1~2.gbpb36d9f) UNRELEASED; urgency=medium
     (Closes: 836011)
   * Update install files
   * Update changelog for 4:16.04.3-2~1.gbp1d9499 release
+  * Update uploaders list as requested by MIA team (Closes: #879326)
 
   [ Automatic packaging ]
   * Update build-deps and deps with the info from cmake
@@ -23,8 +24,9 @@ kdepim (4:16.08.1-1~2.gbpb36d9f) UNRELEASED; urgency=medium
   * Update build-deps and deps with the info from cmake
   * Refresh patches
   * Refresh patches
+  * Update changelog for 4:16.08.1-1~2.gbpb36d9f release
 
- -- Automatic packaging <maxy+jenkins@gnuservers.com.ar>  Fri, 09 Sep 2016 14:32:28 +0200
+ -- Maximiliano Curia <maxy@debian.org>  Tue, 31 Oct 2017 18:00:01 +0100
 
 kdepim (4:16.04.3-1) unstable; urgency=medium
 
