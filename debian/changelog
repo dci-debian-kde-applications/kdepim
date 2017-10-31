@@ -1,6 +1,4 @@
-kdepim (4:16.08.1-1~2.gbpb36d9f1) UNRELEASED; urgency=medium
-
-  ** SNAPSHOT build @b36d9f5ab35ffde3ed81e8616b1f61966d87f80b **
+kdepim (4:16.08.1-1~2) UNRELEASED; urgency=medium
 
   [ Maximiliano Curia ]
   * Add libkf5akonadisearch-plugins dependency to kmail.
@@ -15,16 +13,11 @@ kdepim (4:16.08.1-1~2.gbpb36d9f1) UNRELEASED; urgency=medium
     Thanks to Ismael Bejarano for the backtrace and Sandro Knauß for the patch
     (Closes: 836011)
   * Update install files
-  * Update changelog for 4:16.04.3-2~1.gbp1d9499 release
   * Update uploaders list as requested by MIA team (Closes: #879326)
 
   [ Automatic packaging ]
   * Update build-deps and deps with the info from cmake
   * Refresh patches
-  * Update build-deps and deps with the info from cmake
-  * Refresh patches
-  * Refresh patches
-  * Update changelog for 4:16.08.1-1~2.gbpb36d9f release
 
  -- Maximiliano Curia <maxy@debian.org>  Tue, 31 Oct 2017 18:00:01 +0100
 
